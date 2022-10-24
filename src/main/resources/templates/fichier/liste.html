@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <style th:replace="fragment/style"></style>
+    <title>Liste Fichiers</title>
+</head>
+<body class="hold-transition sidebar-mini ">
+<div class="wrapper">
+    <div th:replace="fragment/navbar-horizontal"></div>
+    <div th:replace="fragment/navbar-vertical"></div>
+
+    <div class="content-wrapper">
+
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 my-2">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title mr-3">Liste des Fichiers</h3>
+                                <a th:href="@{/fichier/new}"> <i class="fas fa-plus"></i></a>
+
+                                <div class="card-tools">
+                                    <div class="input-group input-group-sm">
+
+                                        <button class="btn btn-tool" data-card-widget="collapse" title="Collapse"
+                                                type="button">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <button class="btn btn-tool" data-card-widget="remove" title="Remove"
+                                                type="button">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover text-nowrap table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Nom Complet</th>
+                                        <th>Type</th>
+                                        <th>Taille</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="fichier : ${fichiers}">
+
+                                        <td th:text="${fichier.nom}"></td>
+                                        <td th:text="${fichier.type}"></td>
+
+                                        <td th:with="taille=${fichier.tailleMo}"
+                                            th:text="${#numbers.formatDecimal(taille, 1, 'POINT', 2, 'COMMA')}+' Mo'"></td>
+                                        <td><a th:href="@{/fichier/download/}+''+${fichier.id}"><i
+                                                class="fas fa-download"></i></a></td>
+
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <div th:replace="fragment/footer"></div>
+</div>
+</body>
+<script th:replace="fragment/script"></script>
+</html>
