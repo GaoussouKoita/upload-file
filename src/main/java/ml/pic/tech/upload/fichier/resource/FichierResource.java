@@ -24,7 +24,7 @@ public class FichierResource {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Resource> downloadFileDB(@PathVariable long id) {
+    public ResponseEntity<ByteArrayResource> downloadFileDB(@PathVariable long id) {
         Fichier file = service.getFichier(id);
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType((file.getType())))

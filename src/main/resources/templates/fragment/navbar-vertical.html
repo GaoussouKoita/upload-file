@@ -68,7 +68,52 @@
                 </li>
 
 
-                <li class="nav-header">Nom Header</li>
+                <li class="nav-header">Archive</li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">
+                        <i class="nav-icon fas fa-file-archive"></i>
+                        <p>Archive
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item ml-4">
+                            <a class="nav-link"  th:href="@{/archive/nouveau}">
+                                <i class="fas fa-file-alt"></i>
+                                <p>Nouveau</p>
+                            </a>
+                        </li>
+                        <li class="nav-item ml-4">
+                            <a class="nav-link"  th:href="@{/archive}">
+                                <i class="fas fa-file-alt"></i>
+                                <p>Liste</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">
+                        <i class="nav-icon fas fa-file"></i>
+                        <p>Fichier
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item ml-4">
+                            <a class="nav-link"  th:href="@{/fichier/nouveau}">
+                                <i class="fas fa-file-alt"></i>
+                                <p>Nouveau</p>
+                            </a>
+                        </li>
+                        <li class="nav-item ml-4">
+                            <a class="nav-link"  th:href="@{/fichier}">
+                                <i class="fas fa-file-alt"></i>
+                                <p>Liste</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
             </ul>
         </nav>

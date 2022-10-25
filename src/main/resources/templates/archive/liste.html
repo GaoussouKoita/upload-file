@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <style th:replace="fragment/style"></style>
+    <title>Liste Archives</title>
+</head>
+<body class="hold-transition sidebar-mini ">
+<div class="wrapper">
+    <div th:replace="fragment/navbar-horizontal"></div>
+    <div th:replace="fragment/navbar-vertical"></div>
+
+    <div class="content-wrapper">
+
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 my-2">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title mr-3">Liste des Archives</h3>
+                                <a th:href="@{/archive/nouveau}"> <i class="fas fa-plus"></i></a>
+                                <div class="card-tools">
+                                    <form class="navbar-form navbar-right" method="post"
+                                          th:action="@{/archive/recherche}">
+                                    <div class="input-group input-group-sm">
+                                        <input class="form-control float-right" name="reference"
+                                               placeholder="Entre la reference"
+                                               type="text">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-default" type="submit">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                        <button class="btn btn-tool" data-card-widget="collapse" title="Collapse"
+                                                type="button">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <button class="btn btn-tool" data-card-widget="remove" title="Remove"
+                                                type="button">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="row">
+                                    <th:block th:each="archive : ${archives}">
+                                        <div class="col-lg-4">
+                                            <div class="card-info">
+                                                <div class="card-header">
+                                                    <h3 class="card-title" th:text="${archive.reference}"></h3>
+                                                    <a class="btn swalDefaultError"
+                                                       th:href="@{/archive/}+''+${archive.id}">
+                                                         <i class="fas fa-trash-alt text-danger"></i> </a>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div th:text="${archive.details}"></div>
+                                                    <div>
+                                                        <ol>
+                                                            <li th:each="fichier : ${archive.fichiers}">
+                                                                <span th:text="${fichier.nom}+' '+${#numbers.formatDecimal(taille, 1, 'POINT', 2, 'COMMA')}+' Mo'"
+                                                                      th:with="taille=${fichier.tailleMo}"></span>
+                                                                <a th:href="@{/fichier/download/}+''+${fichier.id}"><i
+                                                                        class="fas fa-download"></i></a></li>
+                                                        </ol>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </th:block>
+                                </div>
+                                <!--
+                                                                <table class="table table-hover text-nowrap table-striped">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th>Date</th>
+                                                                        <th>Reference</th>
+                                                                        <th>Details</th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    <tr th:each="archive : ${archives}">
+
+                                                                        <td th:text="${archive.date}"></td>
+                                                                        <td th:text="${archive.reference}"></td>
+                                                                        <td th:text="${archive.details}"></td>
+                                                                        <td th:each="fichier : ${archive.fichiers}">
+                                                                            <span th:text="${fichier.nom}+' '+${#numbers.formatDecimal(taille, 1, 'POINT', 2, 'COMMA')}+' Mo'"
+                                                                                  th:with="taille=${fichier.tailleMo}"></span>
+                                                                            <span><a th:href="@{/fichier/download/}+''+${fichier.id}"><i
+                                                                                    class="fas fa-download"></i></a></span>
+                                                                        </td>
+
+                                                                        &lt;!&ndash;<td th:text="${#numbers.formatDecimal(taille, 1, 'POINT', 2, 'COMMA')}+' Mo'"
+                                                                            th:with="taille=${archive.tailleMo}"></td>
+                                                                        <td><a th:href="@{/Archive/download/}+''+${archive.id}"><i
+                                                                                class="fas fa-download"></i></a></td>&ndash;&gt;
+
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                -->
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <div th:replace="fragment/footer"></div>
+</div>
+</body>
+<script th:replace="fragment/script"></script>
+</html>

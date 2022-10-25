@@ -20,7 +20,7 @@ public class FichierController {
     @Autowired
     private FichierService service;
 
-    @GetMapping("/new")
+    @GetMapping("/nouveau")
     public String fichierForm(){
         return "fichier/ajout";
     }
@@ -35,11 +35,7 @@ public class FichierController {
 
     @GetMapping("/download/{id}")
     public ResponseEntity<ByteArrayResource> download(@PathVariable Long id) {
-        Fichier file = service.getFichier(id);
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType((file.getType())))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachement; filename=\"" + file.getNom() + "\"")
-                .body(new ByteArrayResource(file.getData()));
+        return service.download(id);
     }
 
     @GetMapping
