@@ -57,4 +57,12 @@ public class FichierService {
                 .body(new ByteArrayResource(fichier.getData()));
     }
 
+    public ResponseEntity lire(Long id){
+        Fichier fichier = getFichier(id);
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType((fichier.getType())))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + fichier.getNom() + "\"")
+                .body(fichier.getData());
+    }
+
 }

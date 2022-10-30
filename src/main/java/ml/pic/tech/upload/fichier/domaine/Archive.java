@@ -23,12 +23,11 @@ public class Archive {
     @Column(length = Integer.MAX_VALUE)
     private String details;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private LocalDateTime dateCreation=LocalDateTime.now();
+    private LocalDateTime dateCreation = LocalDateTime.now();
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate date;
+    private LocalDate date = LocalDate.now();
 
-    @ManyToMany(cascade ={ CascadeType.PERSIST, CascadeType.REMOVE},
-            fetch = FetchType.EAGER)
-    private List<Fichier> fichiers=new ArrayList<>();
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Fichier> fichiers = new ArrayList<>();
 
 }

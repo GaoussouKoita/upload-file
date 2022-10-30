@@ -17,8 +17,10 @@
                     <div class="col-lg-12 my-2">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title mr-3">Liste des Archives</h3>
+                                <h3 class="card-title mr-3">Liste des Archives : </h3>
                                 <a th:href="@{/archive/nouveau}"> <i class="fas fa-plus"></i></a>
+                                <i class="text-info ml-5">Resultat de recherche reference : </i>
+                                <b th:text="${reference}" class="text-info"></b>
                                 <div class="card-tools">
                                     <form class="navbar-form navbar-right" method="get"
                                           th:action="@{/archive/recherche}">
@@ -55,18 +57,18 @@
                                     <th:block th:if="${nbTotalPage}<=3">
                                         <li class="page-item" th:classappend="${currentPage}==0?'disabled'">
                                             <a class="page-link"
-                                               th:href="@{/archive(page=${currentPage-1})}">&laquo;</a></li>
+                                               th:href="@{/archive/recherche(page=${currentPage-1}, reference=${reference})}">&laquo;</a></li>
 
                                         <li class="page-item"
                                             th:classappend="${currentPage}==${status.index}?'active':''"
                                             th:each="page, status : ${totalPage}">
-                                            <a class="page-link" th:href="@{/archive(page=${status.index})}"
+                                            <a class="page-link" th:href="@{/archive/recherche(page=${status.index}, reference=${reference})}"
                                                th:text="${status.index+1}"></a>
                                         </li>
                                         <li class="page-item"
                                             th:classappend="${currentPage}==${nbTotalPage-1}?'disabled'">
                                             <a class="page-link"
-                                               th:href="@{/archive(page=${currentPage+1})}">&raquo;</a></li>
+                                               th:href="@{/archive/recherche(page=${currentPage+1}, reference=${reference})}">&raquo;</a></li>
 
                                     </th:block>
 
@@ -74,17 +76,15 @@
                                         <li class="page-item"
                                             th:classappend="${currentPage}==${nbTotalPage-nbTotalPage}?'disabled':''">
                                             <a class="page-link"
-                                               th:href="@{/archive(page=${currentPage-1})}">&laquo;</a></li>
+                                               th:href="@{/archive/recherche(page=${currentPage-1}, reference=${reference})}">&laquo;</a></li>
 
                                         <li class="page-item"
                                             th:classappend="${currentPage}==${nbTotalPage-nbTotalPage}?'active':''">
-                                            <a class="page-link" th:href="@{/archive(page=0)}"
-                                               th:text="1"></a>
+                                            <a class="page-link" th:href="@{/archive/recherche(page=0 , reference=${reference})}"                                   th:text="1"></a>
                                         </li>
                                         <li class="page-item"
                                             th:classappend="${currentPage}==${nbTotalPage-nbTotalPage+1}?'active':''">
-                                            <a class="page-link" th:href="@{/archive(page=1)}"
-                                               th:text="2"></a>
+                                            <a class="page-link" th:href="@{/archive/recherche(page=1 , reference=${reference})}" th:text="2"></a>
                                         </li>
                                         <li class="page-item" th:if="${nbTotalPage}>5">
                                             <a class="page-link" th:text="..."></a>
@@ -94,19 +94,19 @@
                                         <li class="page-item"
                                             th:classappend="${currentPage}==${nbTotalPage-2}?'active':''"
                                             th:if="${nbTotalPage}>4">
-                                            <a class="page-link" th:href="@{/archive(page=${nbTotalPage-2})}"
+                                            <a class="page-link" th:href="@{/archive/recherche(page=${nbTotalPage-2 }, reference=${reference})}"
                                                th:text="${nbTotalPage-2}"></a>
                                         </li>
 
                                         <li class="page-item"
                                             th:classappend="${currentPage}==${nbTotalPage-1}?'active':''">
-                                            <a class="page-link" th:href="@{/archive(page=${nbTotalPage-1})}"
+                                            <a class="page-link" th:href="@{/archive/recherche(page=${nbTotalPage-1}, reference=${reference})}"
                                                th:text="${nbTotalPage-1}"></a>
                                         </li>
                                         <li class="page-item"
                                             th:classappend="${currentPage}==${nbTotalPage-1}?'disabled'">
                                             <a class="page-link"
-                                               th:href="@{/archive(page=${currentPage+1})}">&raquo;</a></li>
+                                               th:href="@{/archive/recherche(page=${currentPage+1}, reference=${reference})}">&raquo;</a></li>
 
                                     </th:block>
                                 </ul>

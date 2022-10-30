@@ -1,0 +1,45 @@
+<div class="card-body">
+    <div class="row">
+        <th:block th:each="archive : ${archives}">
+            <div class="col-lg-4">
+                <div class="card-info">
+                    <div class="card-header pb-0">
+                        <h3 class="card-title"
+                            th:text="${archive.reference}+' du '+${#temporals.format(date, 'dd MMM yyyy')}"
+                            th:with="date=${archive.date}"></h3>
+                        <div class="card-tools">
+                            <a class="btn swalDefaultError"
+                               th:href="@{/archive/}+''+${archive.id}">
+                                <i class="fas fa-trash-alt text-danger"></i> </a></div>
+                    </div>
+
+                    <div class="card-body bg-light pt-1">
+                        <span th:text="${archive.details}"></span>
+                        <div>
+                            <ol>
+                                <li th:each="fichier : ${archive.fichiers}">
+                                                                <span th:text="${len>18}?${#strings.substring(nom,0,15)+'...'}:${nom}"
+                                                                      th:with="nom=${fichier.nom}, len=${#strings.length(nom)}">
+                                                                </span>
+                                    <b th:text="' '+${#numbers.formatDecimal(taille, 1, 'POINT', 2, 'COMMA')}+' Mo'"
+                                       th:with="taille=${fichier.tailleMo}"></b>
+
+                                    <a th:href="@{/archive/fichier-show/}+''+${fichier.id}"><i
+                                            class="fas fa-eye text-default"></i></a>
+                                    <a th:href="@{/archive/fichier-download/}+''+${fichier.id}"><i
+                                            class="fas fa-download text-info"></i></a>
+                                    <a th:href="@{/archive/fichier-supprimer(idArchive=${archive.id}, idFichier=${fichier.id})}"><i
+                                            class="fas fa-trash text-danger ml-1"></i></a>
+
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </th:block>
+    </div>
+
+</div>
